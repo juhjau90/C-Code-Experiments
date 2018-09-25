@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.IO;
+using System.Threading;
 
 /*GAME RULES: AI and the player have 6 cards to play ranging from Ace (1) to King (13). Cards are dealt randomly to both 
 AI and the player (because deck usually has 4 suits, duplicates or more cards with same value are allowed to appear). 
@@ -19,13 +20,12 @@ voittaja. Jos jompikumpi kuitenkin saavat käden jonka arvo ylittää 21, hän h
 
 namespace Blackjack
 {
-	class Game
+	static class Game
 	{
-		/*Some shared variables - the random for number generation and shuffeling and variables for player and AI cards. 
-		Jaettuja muuttujia - satunnaismuuttuja numero generointiin ja sekoitukseen ja muuttujat pelaajan ja AIn korteille.*/
-		Random rand = new Random();
-		var playerHand;
-		var AIHand;
+		/*Shared random variable which must be set to static in order for it be usable within the class. We use this for
+		various functions. Jaettu sattuma muuttuja joka täytyy asettaa staattiseksi jotta se toimisi luokan sisällä.
+		Käytämme tätä useassa funktiossa.*/
+		static Random rand = new Random();
 		
 		static void Main()
 		{
@@ -36,46 +36,63 @@ namespace Blackjack
 				List<int> playerCards = PlayerCards();
 				List<int> aiCards = AICards();
 				
-				playerCards.Shuffelin();
-				aiCards.Shuffelin();
+				/* playerCards.Shuffelin();
+				aiCards.Shuffelin(); */
 				
 				int playerHandSum = playerCards.Sum(); //Player hand total. Pelaajan käden kokonaisarvo.
 				int aiHandSum = aiCards.Sum(); //AI hand total. AI:n käden kokonaisarvo.
 				
 				Console.WriteLine("The players hand is: ");
-				playerCards.ForEach(Console.Writeline);				
+				playerCards.ForEach(Console.WriteLine);				
 				Console.WriteLine("");
+				
+				HoldIt();
 				
 				Console.WriteLine("The AI hand is: ");
-				aiCards.ForEach(Console.Writeline);
+				aiCards.ForEach(Console.WriteLine);
 				Console.WriteLine("");
 				
-				Console.Writeline("The sum of players hand is " + playerHandSum.ToString());
-				Console.Writeline("The sum of AI hand is " + aiHandSum.ToString());
+				HoldIt();
+				
+				Console.WriteLine("The sum of players hand is " + playerHandSum.ToString());
+				Console.WriteLine("The sum of AI hand is " + aiHandSum.ToString());
+				
+				HoldIt();
 				
 				if(playerHandSum > aiHandSum && playerHandSum <= 21)
 				{
-					Console.Writeline("The player wins!");
+					Console.WriteLine("The player wins!");
 				}
 				else if(aiHandSum > playerHandSum && aiHandSum <= 21)
 				{
-					Console.Writeline("The AI wins!");
+					Console.WriteLine("The AI wins!");
 				}
 				
-				
+				HoldIt();
 				
 			}
 			catch(Exception e)
 			{
-				
+				Console.WriteLine("{0}Exception has been caught.", e);
 			}
 		}
 		
+		/*Small function to pause between operations/steps. Pieni funktio toimintojen/vaiheiden tauotukseen.*/
+		static void HoldIt()
+		{			
+			Thread.Sleep(rand.Next(500, 1500));
+		}
+		
+		
+		/*Below function was commented out as it was deemed repetetive and caused error in running the exe-file.
+		Allaoleva funktio kommentoitiin pois koska se oli turhaa toistoa ja aiheutti virheitä exe-tiedoston ajossa.*/
 		
 		/*Function used to shuffle cards. Basis on Fisher-Yates shuffle algorithm.
 		Korttien sekoitukseen käytettävä funktio. Pohjana toimii Fisher-Yates shuffle algoritmi.*/
-		public static void Shuffelin<T>(this IList<T> cards>
+		/* public static void Shuffelin<T>(this IList<T> cards)
 		{
+			Random rand = new Random();
+			
 			int x = cards.Count;
 			
 			for(int i = cards.Count - 1; i > 1; i++)
@@ -86,12 +103,13 @@ namespace Blackjack
 				cards[rng] = cards[i];
 				cards[i] = value;
 			}
-		}
+		} */
 		
 		/*Function that creates the player hand. Funktio joka luo pelaajan kortit.*/
 		static List<int> PlayerCards()
 		{
-			playerHand = new List<int>();
+			
+			var playerHand = new List<int>();
 			
 			for (int a = 0; a < 6; a++)
 			{
@@ -104,7 +122,8 @@ namespace Blackjack
 		/*Function that creates the AI cards. Funktio joka luo AIn kortit.*/
 		static List<int> AICards()
 		{
-			AIHand = new List<int>();
+			
+			var AIHand = new List<int>();
 			
 			for (int b = 0; b < 6; b++)
 			{
@@ -113,5 +132,6 @@ namespace Blackjack
 			
 			return AIHand;
 		}
+		
 	}
 }
