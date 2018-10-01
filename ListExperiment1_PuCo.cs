@@ -8,8 +8,9 @@ Samalla myös pieni kosketus "ninja" koodailuun muuttuja nimien kanssa.*/
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Ling;
+using System.Linq;
 using System.Text;
+using System.Threading;
 
 class ListExperiment1
 {
@@ -22,16 +23,51 @@ class ListExperiment1
 			
 			fillList(itm);
 			
-			Console.Write("List contains the following;");
+			Console.WriteLine("List contains the following;");
+			Console.WriteLine("");
 			displayList(itm);
+			Console.WriteLine("");
 			
-			//Variables to strore user inputs. Muuttujat joihin tallennamme käyttäjän syötteet.
-			int staInd;
-			int rne;
+			holdOn();
 			
-			userInputs(staInd, rne);
+			//We'll ask if the user wants to filter the list. Kysymme haluaako käyttäjä filtteröidä listaa.
+			Console.WriteLine("Do you wish to filter the list? (y/n)");
+			string ans = Console.ReadLine();
+			Console.WriteLine("");
 			
-			itm.RemoveRange(staInd, rne);
+			if(ans.Equals("y"))
+			{
+				//number variables to contain the inputs. Numeromuuttujia säilömään käyttäjän syötteet
+				int fiVa;
+				int rne;
+				
+				Console.Write("Input the index of the entry that serves as starting point: ");
+				string val = Console.ReadLine();
+				fiVa = Convert.ToInt32(val);
+				Console.WriteLine("");
+				
+				Console.Write("Input the range/amount entries you wish to remove (including the starting point): ");
+				string val2 = Console.ReadLine();
+				rne = Convert.ToInt32(val2);
+				Console.WriteLine("");
+				
+				holdOn();
+				
+				//Removing items from list based on earlier inputs. Listasisältöä poistetaan aiemppiin syötteisiin pohjautuen.
+				itm.RemoveRange(fiVa, rne); 
+				
+				Console.WriteLine("Here's the list after filtering: ");
+				Console.WriteLine("");
+				displayList(itm);
+				
+				holdOn();
+			}
+			else if(ans.Equals("n"))
+			{
+				Console.WriteLine("Thank you for using this application.");
+				holdOn();
+			}
+			
 			
 		}
 		catch (Exception u)
@@ -42,32 +78,6 @@ class ListExperiment1
 				
 	}
 	
-	/*Function containing the steps involving user inputs. Funktio joka pitää sisällään käyttäjän
-	syötteiden käsittelyyn keskittyneet toiminnot.*/
-	static void userInputs(int j, int k)
-	{
-		Console.WriteLine("Do you wish to filter/clean the list? (y/n)");
-		string ans = Console.ReadLine();
-		
-		if(ans.Equals("y"))
-		{
-			Console.Write("Enter the number of the item you wish to use as starting point: ");
-			string nmr = Console.ReadLine();
-			j = Convert.ToInt32(nmr);
-			Console.WriteLine("");
-			
-			Console.Write("Enter the number of items you wish to remove after the starting point: ");
-			string snmr = Console.ReadLine();
-			k = Convert.ToInt32(snmr);
-			Console.WriteLine("");
-			
-		}
-		else if (ans.Equals("n"))
-		{
-			Console.WriteLine("Thank you for using this small application!");
-			break;
-		}
-	}
 	
 	/*Function to fill the list variable with external file and StreamReader.
 	Funktio listan täyttämiseen ulkoisen tiedoston ja StreamReaderin avulla.*/
@@ -75,7 +85,7 @@ class ListExperiment1
 	{
 		using (StreamReader rar = new StreamReader("testTextLines.txt"))
 		{
-			var le;
+			string le;
 			
 			while((le = rar.ReadLine())!= null)
 			{
@@ -91,5 +101,13 @@ class ListExperiment1
 		{
 			Console.WriteLine(lne);
 		}
+	}
+	
+	//Small function for pausing. Pieni funktio paussittamista varten.
+	static void holdOn()
+	{
+		Random rnd = new Random();
+		
+		Thread.Sleep(rnd.Next(60, 160));
 	}
 }
