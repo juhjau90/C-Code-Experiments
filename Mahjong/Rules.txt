@@ -1,0 +1,55 @@
+Rules to simulate
+
+Game type: Mahjong with Japanese set (Richi mahjong), no Flower or Season tiles tiles.
+
+Amount of players: 2
+
+Amount of Tiles: 141
+		
+		- 3 Suits (Dots, Bamboos, Characters)
+			
+			- Each suit has 4 sets of tiles
+				
+				- Each set goes trough number 1 to 9
+			
+			- Total amount of tiles per suite is thus 36
+			
+			- Total amount of Suit tiles is thus 144
+				
+		- Honor tiles (Winds, Dragons)
+		
+			- There are 4 sets of Winds tiles
+			
+				- Each set contains 4 tiles (East, West, North, South)
+				
+					- Total amount of Winds tiles is thus 16
+					
+			- There are 4 sets of Dragons tiles
+			
+				- Each set contains 3 tiles (Red, Green, White)
+				
+					- Total amount of Dragons tiles is thus 12
+					
+			- Total amount of Honor tiles is thus 28
+			
+		- Red 5 tiles 
+		
+			- One red 5 tile for each suit
+			- One extra 5 tile for Dots suit
+			
+			- Total amount of Red 5 tiles is thus 5
+			
+Win conditions: Player with higher hand/tileset wins (possible score/times won limit?)
+
+		- If one has higher value hand then the other, the one wins.
+		
+		- If one has a hand and other doesnn't, one with the hand wins.
+		
+		- If either do not have a hand, the one with higher hand/tilevalue sum wins.
+		
+		- If either have same valued hands or have equal sums, game is a draw.
+		
+
+NOTE: The game and it's win conditions have been simplified from official Mahjong rules.
+			
+		

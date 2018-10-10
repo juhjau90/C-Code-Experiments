@@ -1,0 +1,35 @@
+Guidelines for forming a hand.
+
+Standards/Rules for a hand; 
+
+	- Hand must be composed of three 3- or 4-tile groups and one pair
+	
+
+3-4 tile combinations/groups;
+
+	- Shuntsu(Sequence): 3 tiles of the same suit in correct running order
+	
+		- Honour tiles are not valid for a Shuntsu, only base suit tiles
+		
+	- Koutsu(Triplet): 3 of the same tile
+	
+	- Kantsu(Kan): 4 of the same tile.
+	
+	
+Possible hands for the game (with set rules);
+
+	- 3 Shuntsu and a Pair
+	
+	- 3 Koutsu and a Pair
+	
+	- 3 Kantsu and a Pair
+	
+	- 1 Shuntsu, 2 Koutsu and a Pair
+	
+	- 1 Koutsu, 2 Shuntsu and a Pair
+	
+	- 1 Kantsu, 2 Shuntsu or Koutsu and a Pair
+	
+	- 2 Kantsu, 1 Shuntsu or Koutsu and a Pair
+	
+	- 1 Kantsu, 1 Shuntsu, 1 Koutsu and a Pair
